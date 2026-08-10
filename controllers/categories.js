@@ -20,14 +20,14 @@ const index = async (req, res) => {
 
 const update = async (req, res) => {
     try {
-const category = await Category.findById(req.params.id)
+const category = await Category.findById(req.params.categoryId)
 
 if (!category.user.equals(req.user._id)) {
     return res.status(403).json({ err: "You're not allowed to do that!" })
 }
 
 const updatedCategory = await Category.findByIdAndUpdate(
-    req.params.id,
+    req.params.categoryId,
     req.body,
     { new: true })
 
