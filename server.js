@@ -35,6 +35,8 @@ app.post('/auth/sign-in', authCtrl.signIn)
 
 app.get('/users', verifyToken, usersCtrl.index)
 app.post('/categories', verifyToken, categoriesCtrl.create)
+app.get('/categories', verifyToken, categoriesCtrl.index)
+
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
