@@ -17,6 +17,11 @@ category: {
     ref: 'Category',
 },
 
+completed: {
+    type: Boolean,
+    default: false,
+},
+
 }, {timestamps: true})
 
 const Habit = mongoose.model('Habit', habitSchema)

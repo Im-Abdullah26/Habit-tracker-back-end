@@ -15,6 +15,8 @@ user: {
     ref: 'User',
 }, 
 
+
+
 }, {timestamps: true})
 
 const Category = mongoose.model('Category', categorySchema)
