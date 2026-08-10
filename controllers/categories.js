@@ -18,9 +18,27 @@ const index = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+    try {
+const category = await Category.findById(req.params.id)
+
+if (!category.user.equals(req.user._id)) {
+    return res.status(403).json({ err: "You're not allowed to do that!" })
+}
+
+const updatedCategory = await Category.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true })
+
+res.status(200).json(updatedCategory)
+    } catch (err) {
+        res.status(500).json({ err: err.message })
+    }
+}
 
 module.exports = {
     create,
     index,
-
+    update,
 }
