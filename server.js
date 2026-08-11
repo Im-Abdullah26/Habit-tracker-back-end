@@ -37,6 +37,7 @@ app.get('/users', verifyToken, usersCtrl.index)
 app.post('/categories', verifyToken, categoriesCtrl.create)
 app.get('/categories', verifyToken, categoriesCtrl.index)
 app.put('/categories/:categoryId', verifyToken, categoriesCtrl.update)
+app.delete('/categories/:categoryId', verifyToken, categoriesCtrl.deleteCategory)
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
