@@ -40,10 +40,25 @@ res.status(200).json(updatedHabit)
     }
 }
 
+const deleteHabit = async (req, res) => {
+  try {
+    const habit = await Habit.findById(req.params.habitId)
+
+    if (!habit.user.equals(req.user._id)) {
+        return res.status(403).json({ err: "You're not allowed to do that!" })
+    }
+
+    const deletedHabit = await Habit.findByIdAndDelete(req.params.habitId)
+    res.status(200).json(deletedHabit)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 module.exports = {
     create,
     index,
     update,
-
+    deleteHabit,
 
 }
