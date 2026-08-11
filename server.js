@@ -43,6 +43,7 @@ app.delete('/categories/:categoryId', verifyToken, categoriesCtrl.deleteCategory
 app.post('/habits', verifyToken, habitsCtrl.create)
 app.get('/habits', verifyToken, habitsCtrl.index)
 app.put('/habits/:habitId', verifyToken, habitsCtrl.update)
+app.delete('/habits/:habitId', verifyToken, habitsCtrl.deleteHabit)
 
 app.listen(PORT, () => {
   console.log(`The express app is ready on port ${PORT}! 😀`)
