@@ -11,6 +11,19 @@ const create = async (req, res) => {
     }
 }
 
+const index = async (req, res) => {
+  try {
+const habits = await Habit.find({ user: req.user._id })
+  .populate('category')
+  .sort({ createdAt: 'desc' })
+res.status(200).json(habits)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 module.exports = {
     create,
+    index,
+
 }
