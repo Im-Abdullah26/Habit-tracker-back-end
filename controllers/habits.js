@@ -22,8 +22,28 @@ res.status(200).json(habits)
   }
 }
 
+const update = async (req, res) => {
+    try {
+        const habit = await Habit.findById(req.params.habitId)
+        if (!habit.user.equals(req.user._id)) {
+    return res.status(403).json({ err: "You're not allowed to do that!" })
+}
+
+    const updatedHabit = await Habit.findByIdAndUpdate(
+      req.params.habitId,
+      req.body,
+      { new: true }
+    )
+res.status(200).json(updatedHabit)
+    } catch (err) {
+    res.status(500).json({ err: err.message })
+    }
+}
+
 module.exports = {
     create,
     index,
+    update,
+
 
 }
