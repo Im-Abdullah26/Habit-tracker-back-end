@@ -37,8 +37,27 @@ res.status(200).json(updatedCategory)
     }
 }
 
+const deleteCategory = async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.categoryId)
+
+        if (!category.user.equals(req.user._id)) {
+            return res.status(403).json({ err: "You're not allowed to do that!" })
+        }
+        
+        const deletedCategory = await Category.findByIdAndDelete(req.params.categoryId)
+    res.status(200).json(deletedCategory)
+        
+    } catch (err) {
+        res.status(500).json({ err: err.message })
+    }
+}
+
 module.exports = {
     create,
     index,
     update,
+    deleteCategory,
+    
+
 }
